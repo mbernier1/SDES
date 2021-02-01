@@ -1,2 +1,9 @@
 ﻿  Main.cpp
-  SDES.vcxproj -> D:\Cryptography\SDES\SDES\Debug\SDES.exe
+E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(179,27): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(179,32): warning C4305: 'initializing': truncation from 'int' to 'char'
+E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(179,27): warning C4309: 'initializing': truncation of constant value
+E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(180,27): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(180,32): warning C4305: 'initializing': truncation from 'int' to 'char'
+E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(180,27): warning C4309: 'initializing': truncation of constant value
+E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(174): warning C4172: returning address of local variable or temporary: keyRay2
+  SDES.vcxproj -> E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\Debug\SDES.exe
