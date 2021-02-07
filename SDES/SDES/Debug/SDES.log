@@ -1,50 +1,51 @@
 ﻿  Main.cpp
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(37,25): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(37,30): warning C4305: 'initializing': truncation from 'int' to 'char'
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(37,25): warning C4309: 'initializing': truncation of constant value
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(38,23): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(38,28): warning C4305: 'initializing': truncation from 'int' to 'char'
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(38,23): warning C4309: 'initializing': truncation of constant value
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(156,20): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(156,25): warning C4305: 'initializing': truncation from 'int' to 'char'
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(156,20): warning C4309: 'initializing': truncation of constant value
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(157,20): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(157,25): warning C4305: 'initializing': truncation from 'int' to 'char'
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(157,20): warning C4309: 'initializing': truncation of constant value
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(216,25): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(216,30): warning C4305: 'initializing': truncation from 'int' to 'char'
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(216,25): warning C4309: 'initializing': truncation of constant value
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(217,24): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(217,29): warning C4305: 'initializing': truncation from 'int' to 'char'
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(217,24): warning C4309: 'initializing': truncation of constant value
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(218,24): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(218,29): warning C4305: 'initializing': truncation from 'int' to 'char'
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(218,24): warning C4309: 'initializing': truncation of constant value
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(219,24): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(219,29): warning C4305: 'initializing': truncation from 'int' to 'char'
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(219,24): warning C4309: 'initializing': truncation of constant value
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(220,24): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(220,29): warning C4305: 'initializing': truncation from 'int' to 'char'
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(220,24): warning C4309: 'initializing': truncation of constant value
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(221,26): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(221,31): warning C4305: 'initializing': truncation from 'int' to 'char'
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(221,26): warning C4309: 'initializing': truncation of constant value
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(295,25): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(295,30): warning C4305: 'initializing': truncation from 'int' to 'char'
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(295,25): warning C4309: 'initializing': truncation of constant value
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(296,24): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(296,29): warning C4305: 'initializing': truncation from 'int' to 'char'
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(296,24): warning C4309: 'initializing': truncation of constant value
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(297,24): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(297,29): warning C4305: 'initializing': truncation from 'int' to 'char'
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(297,24): warning C4309: 'initializing': truncation of constant value
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(298,24): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(298,29): warning C4305: 'initializing': truncation from 'int' to 'char'
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(298,24): warning C4309: 'initializing': truncation of constant value
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(299,24): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(299,29): warning C4305: 'initializing': truncation from 'int' to 'char'
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(299,24): warning C4309: 'initializing': truncation of constant value
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(300,26): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(300,31): warning C4305: 'initializing': truncation from 'int' to 'char'
-E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\SDES\Main.cpp(300,26): warning C4309: 'initializing': truncation of constant value
-  SDES.vcxproj -> E:\CST 407 Intro to Cryptography\Homework\SDES\SDES\Debug\SDES.exe
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(40,25): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(40,30): warning C4305: 'initializing': truncation from 'int' to 'char'
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(40,25): warning C4309: 'initializing': truncation of constant value
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(41,23): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(41,28): warning C4305: 'initializing': truncation from 'int' to 'char'
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(41,23): warning C4309: 'initializing': truncation of constant value
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(159,20): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(159,25): warning C4305: 'initializing': truncation from 'int' to 'char'
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(159,20): warning C4309: 'initializing': truncation of constant value
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(160,20): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(160,25): warning C4305: 'initializing': truncation from 'int' to 'char'
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(160,20): warning C4309: 'initializing': truncation of constant value
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(340,25): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(340,30): warning C4305: 'initializing': truncation from 'int' to 'char'
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(340,25): warning C4309: 'initializing': truncation of constant value
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(341,24): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(341,29): warning C4305: 'initializing': truncation from 'int' to 'char'
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(341,24): warning C4309: 'initializing': truncation of constant value
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(342,24): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(342,29): warning C4305: 'initializing': truncation from 'int' to 'char'
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(342,24): warning C4309: 'initializing': truncation of constant value
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(343,24): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(343,29): warning C4305: 'initializing': truncation from 'int' to 'char'
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(343,24): warning C4309: 'initializing': truncation of constant value
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(344,24): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(344,29): warning C4305: 'initializing': truncation from 'int' to 'char'
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(344,24): warning C4309: 'initializing': truncation of constant value
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(345,26): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(345,31): warning C4305: 'initializing': truncation from 'int' to 'char'
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(345,26): warning C4309: 'initializing': truncation of constant value
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(419,25): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(419,30): warning C4305: 'initializing': truncation from 'int' to 'char'
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(419,25): warning C4309: 'initializing': truncation of constant value
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(420,24): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(420,29): warning C4305: 'initializing': truncation from 'int' to 'char'
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(420,24): warning C4309: 'initializing': truncation of constant value
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(421,24): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(421,29): warning C4305: 'initializing': truncation from 'int' to 'char'
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(421,24): warning C4309: 'initializing': truncation of constant value
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(422,24): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(422,29): warning C4305: 'initializing': truncation from 'int' to 'char'
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(422,24): warning C4309: 'initializing': truncation of constant value
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(423,24): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(423,29): warning C4305: 'initializing': truncation from 'int' to 'char'
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(423,24): warning C4309: 'initializing': truncation of constant value
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(424,26): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(424,31): warning C4305: 'initializing': truncation from 'int' to 'char'
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(424,26): warning C4309: 'initializing': truncation of constant value
+D:\Cryptography\SDES\SDES\SDES\Main.cpp(259): warning C4172: returning address of local variable or temporary: swappedKey
+  SDES.vcxproj -> D:\Cryptography\SDES\SDES\Debug\SDES.exe

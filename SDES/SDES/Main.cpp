@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+   #define _CRT_SECURE_NO_WARNINGS
 #define _CRTDBG_MAP_ALLOC
 
 #include <iostream>
@@ -18,6 +18,9 @@ using std::getline;
 using std::bitset;
 
 void Encryption(char input[], char key[]);
+char* Permutation(char input[]);
+char* InversePermutation(char input[]);
+char* XOR(char EP[], char key[]);
 void Decryption(char input[], char key[]);
 bool BitCheck(const string& bits);
 char* Swap(char key[]);
@@ -155,6 +158,11 @@ void Encryption(char input[], char userKey[])
 
 	char key1[10] = { '/0' };
 	char key2[10] = { '/0' };
+	char finalKey1[8] = { '\0' };
+	char finalKey2[8] = { '\0' };
+	char perm1[4] = { '\0' };
+	char perm2[4] = { '\0' };
+	char expan_perm[8] = { '\0' };
 
 	//COPY USERKEY TO KEY1 AND KEY2
 	for (int i = 0; i < 10; ++i) {
@@ -171,11 +179,127 @@ void Encryption(char input[], char userKey[])
 	cout << "~~ Generating Key 2 ~~" << endl;
 	Swap(key2);
 	Shift3(key2);
-
+	
+	for (int i = 0; i < 8; ++i) {
+		finalKey1[i] = key1[i];
+		finalKey2[i] = key2[i];
+	}
 	//BEGIN ENCRYPTING input[] with key1 and key2
+	Permutation(input);
+
+	//split input into 2 different 4 bit arrays
+	//permutation first 4 - 4, 1, 2, 3
+	//permutation second 4 - 2, 3, 4, 1
+	
+	cout << "Input array after permutation: ";
+	
+	for  (int i  = 0; i < 8; i++)
+	{
+		cout << input[i];
+	}
+	
+	for (int i = 0, j = 4; j < 8; i++, j++)
+	{
+		perm1[i] = input[i];
+		perm2[i] = input[j];
 
 
+		cout << "First 4 bits are: " << perm1[i] << endl;
+		cout << "Second 4 bits are: " << perm2[i] << endl;
+	}
+	
+	expan_perm[0] = perm2[3];
+	expan_perm[1] = perm2[0];
+	expan_perm[2] = perm2[1];
+	expan_perm[3] = perm2[2];
+	expan_perm[4] = perm2[1];
+	expan_perm[5] = perm2[2];
+	expan_perm[6] = perm2[3];
+	expan_perm[7] = perm2[0];
+
+	XOR(expan_perm, finalKey1);
+	
+	
 }
+
+char* Permutation(char input[])
+{
+	char swappedKey[10] = { '\0' };
+
+	swap(swappedKey[0], input[1]);
+	swap(swappedKey[1], input[5]);
+	swap(swappedKey[2], input[2]);
+	swap(swappedKey[3], input[0]);
+	swap(swappedKey[4], input[3]);
+	swap(swappedKey[5], input[7]);
+	swap(swappedKey[6], input[4]);
+	swap(swappedKey[7], input[6]);
+
+	for (int i = 0; i < 8; i++)
+	{
+		input[i] = swappedKey[i];
+	}
+
+	return input;
+}
+
+char* InversePermutation(char input[])
+{
+	char swappedKey[10] = { '\0' };
+
+	swap(swappedKey[0], input[3]);
+	swap(swappedKey[1], input[0]);
+	swap(swappedKey[2], input[2]);
+	swap(swappedKey[3], input[4]);
+	swap(swappedKey[4], input[6]);
+	swap(swappedKey[5], input[1]);
+	swap(swappedKey[6], input[7]);
+	swap(swappedKey[7], input[5]);
+
+	return swappedKey;
+}
+
+char* XOR(char EP[], char key[])
+{
+	//XOR the permutated plaintext witht he first generated key
+	//return the new 8 bit array from the XOR
+	
+	char tempRay[8] = {'\0'};
+
+	for (int i = 0; i < 8; i++)
+	{		
+		if(EP[i] == 0 && key[i] == 0) //if both arrays are 0
+		{
+			tempRay[i] = 0;
+		}
+		if(EP[i] == 1 && key[i] == 0) //if one array has a 1
+		{
+			tempRay[i] = 1;
+		}
+		if(EP[i] == 0 && key[i] == 1) //if one array has a 1
+		{
+			tempRay[i] = 1;
+		}
+		else //if both arrays are 1
+		{
+			tempRay[i] = 0;
+		}
+	}
+	/*for (int i = 0; i < 8; i++)
+	{
+		EP[i] = {'\0'};
+	}*/
+	
+	for (int i = 0; i < 8; i++)
+	{
+		EP[i] = tempRay[i];
+	}
+
+	
+
+	return EP;
+}
+
 
 void Decryption(char input[], char key[])
 {
