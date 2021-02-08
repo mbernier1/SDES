@@ -37,8 +37,8 @@ int main()
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-	//int  menu = 3;
-	//bool done = false;
+	int  menu = 3;
+	bool done = false;
 
 	string inputStr = " ";
 	string TenBitKey = " ";
@@ -49,127 +49,110 @@ int main()
 	char EightBitKeyRay2[9] = { '/0' };
 	char pt_array[9] = { '/0' };
 
-	/*
+
 	cout << "SDES Cipher" << endl;
 	cout << "Would you like to encrypt or decrypt?" << endl;
 	cout << "Please enter 1 for encrypt.\n"
 		<< "Please enter 2 for decrypt.\n" << endl;
-	*/
 
 	//ENCRYPTION
-	cout << "Enter 10-bit key." << endl;
-	cin >> TenBitKey;
+	//cout << "Enter 10-bit key." << endl;
+	//cin >> TenBitKey;
 
-	cout << "Enter 8-bit Plaintext." << endl;
-	cin >> inputStr;
+	//cout << "Enter 8-bit Plaintext." << endl;
+	//cin >> inputStr;
 
-	strcpy(TenBitKeyRay, TenBitKey.c_str());
-	strcpy(pt_array, inputStr.c_str());
+	//strcpy(TenBitKeyRay, TenBitKey.c_str());
+	//strcpy(pt_array, inputStr.c_str());
 
-	Encryption(pt_array, TenBitKeyRay);
+	//Encryption(pt_array, TenBitKeyRay);
 
 
-	//DECRYPTION
-	cout << "Enter 8-bit key 1." << endl;
-	cin >> EightBitKey1;
+	////DECRYPTION
+	//cout << "Enter 8-bit key 1." << endl;
+	//cin >> EightBitKey1;
 
-	cout << "Enter 8-bit key 2." << endl;
-	cin >> EightBitKey2;
+	//cout << "Enter 8-bit key 2." << endl;
+	//cin >> EightBitKey2;
 
-	cout << "Enter 8-bit Ciphertext." << endl;
-	cin >> inputStr;
+	//cout << "Enter 8-bit Ciphertext." << endl;
+	//cin >> inputStr;
 
-	strcpy(EightBitKeyRay1, EightBitKey1.c_str());
-	strcpy(EightBitKeyRay2, EightBitKey2.c_str());
-	strcpy(pt_array, inputStr.c_str());
+	//strcpy(EightBitKeyRay1, EightBitKey1.c_str());
+	//strcpy(EightBitKeyRay2, EightBitKey2.c_str());
+	//strcpy(pt_array, inputStr.c_str());
 
-	Decryption(pt_array, EightBitKeyRay1, EightBitKeyRay2);
+	//Decryption(pt_array, EightBitKeyRay1, EightBitKeyRay2);
 
-	//cin >> menu;
-	//do
-	//{
-	//	switch (menu)
-	//	{
-	//	case 1:
-	//		cout << "Enter the binary you would to encrypt" << endl;
-	//		cin >> inputStr;
+	cin >> menu;
+	do
+	{
+		switch (menu)
+		{
+		case 1:
+			cout << "Enter 10-bit key." << endl;
+			cin >> TenBitKey;
 
-	//		cout << "Enter the key" << endl;
-	//		cin >> keyStr;
+			cout << "Enter 8-bit Plaintext." << endl;
+			cin >> inputStr;
 
-	//		if (BitCheck(inputStr) == true && BitCheck(keyStr) == true)
-	//		{
-	//			if (inputStr.length() == 8)
-	//			{
-	//				if (keyStr.length() == 10)
-	//				{
-	//					char input_array[9];
-	//					strcpy(input_array, inputStr.c_str());
-	//					
-	//					char key_array[11];
-	//					strcpy(key_array, keyStr.c_str());
+			if (BitCheck(inputStr) == true && BitCheck(TenBitKey) == true)
+			{
+				if (inputStr.length() == 8 && TenBitKey.length() == 10)
+				{
+					strcpy(pt_array, inputStr.c_str());
 
-	//					
-	//					Encryption(inputStr, keyStr);
+					strcpy(TenBitKeyRay, TenBitKey.c_str());
 
-	//					
-	//					done = true;
-	//				}
-	//				else
-	//				{
-	//					done = false;
-	//				}
-	//			}
-	//			else
-	//			{
-	//				done = false;
-	//			}
-	//		}
-	//		else
-	//		{
-	//			done = false;
-	//		}
+					Encryption(pt_array, TenBitKeyRay);
 
-	//		break;
+					done = true;
 
-	//	case 2:
-	//		cout << "Enter the binary you would to decrypt" << endl;
-	//		cin >> inputStr;
+				}
+				else
+				{
+					done = false;
+				}
+			}
+			else
+			{
+				done = false;
+			}
+			break;
 
-	//		cout << "Enter the key" << endl;
-	//		cin >> keyStr;
+		case 2:
+			cout << "Enter 8-bit key 1." << endl;
+			cin >> EightBitKey1;
 
-	//		if (BitCheck(inputStr) == true && BitCheck(keyStr) == true)
-	//		{
-	//			if (inputStr.length() == 8)
-	//			{
-	//				if (keyStr.length() == 10)
-	//				{
-	//					char input_array[9];
-	//					strcpy(input_array, inputStr.c_str());
-	//					char key_array[11];
-	//					strcpy(key_array, keyStr.c_str());
+			cout << "Enter 8-bit key 2." << endl;
+			cin >> EightBitKey2;
 
-	//					done = true;
+			cout << "Enter 8-bit Ciphertext." << endl;
+			cin >> inputStr;
 
-	//					Encryption(inputStr, keyStr);
-	//				}
-	//				else
-	//				{
-	//					done = false;
-	//				}
-	//			}
-	//			else
-	//			{
-	//				done = false;
-	//			}
-	//		}
-	//		break;
+			if (BitCheck(inputStr) == true && BitCheck(EightBitKey1) == true && BitCheck(EightBitKey2) == true)
+			{
+				if (inputStr.length() == 8 && EightBitKey1.length() == 10 && EightBitKey2.length() == 10)
+				{
+					strcpy(EightBitKeyRay1, EightBitKey1.c_str());
+					strcpy(EightBitKeyRay2, EightBitKey2.c_str());
+					strcpy(pt_array, inputStr.c_str());
 
-	//	default:
-	//		cout << "Invalid Choice" << endl;
-	//	}
-	//} while (done == false);
+					Decryption(pt_array, EightBitKeyRay1, EightBitKeyRay2);
+
+					done = true;
+				}
+				else
+				{
+					done = false;
+				}
+			}
+			break;
+
+		default:
+			cout << "Invalid Choice" << endl;
+		}
+	} while (done == false);
 
 	system("pause");
 
@@ -281,7 +264,7 @@ void Encryption(char userInput[], char userKey[])
 
 	//XOR PART 2 OF PLAINTEXT WITH KEY 1
 	XorWithKey(Xor4BitResultStep1, finalKey2, XorPT2);
-	
+
 	//SPLIT XOR'D PLAINTEXT INTO 2 PARTS
 	cout << "Pre Sbox Split Part 3: ";
 	for (int i = 0; i < 4; ++i) {
@@ -714,7 +697,7 @@ void XorWithKey(char plaintext[], char key[], char result[]) {
 void SBoxZero(char splitPT[], char result[]) {
 
 	int SBox0[4][4] = { 1,0,3,2,3,2,1,0,0,2,1,3,3,1,3,2 };
-	const char *bits[4] = { "00","01","10","11" };
+	const char* bits[4] = { "00","01","10","11" };
 	char temp[] = "0";
 	char row[3] = "0";
 	char col[3] = "0";
@@ -834,7 +817,7 @@ void P4Swap(char SBoxResult1[], char SBoxResult2[], char Result[]) {
 	cout << endl;
 }
 
-void Xor4Bit(char SplitPT1[], char P4Result[], char result[]){
+void Xor4Bit(char SplitPT1[], char P4Result[], char result[]) {
 
 	cout << "XOR Result: ";
 	for (int i = 0; i < 4; ++i) {
@@ -868,23 +851,27 @@ void Xor4Bit(char SplitPT1[], char P4Result[], char result[]){
 //}
 
 
-//bool BitCheck(const string & bits)
-//{
-//	bool pass = false;
-//
-//	do
-//	{
-//
-//		for (int i = 0; i < bits.length(); i++)
-//		{
-//
-//			if ()
-//			{
-//
-//			}
-//
-//		}
-//	} while (pass == true);
-//
-//	return pass;
-//}
+bool BitCheck(const string& bits)
+{
+	const char* m_bits[2] = { "0","1" };
+	char temp[10] = { "0" };
+	bool pass = false;
+
+	//PUT BITS PASSED IN INTO AN ARRAY
+	strcpy(temp, bits.c_str());
+
+	//COMPARE EACH BIT FROM THE STRING PASSED IN AGAINST SMALLER ARRAY WITH 1 AND 0 IN IT
+	for (int i = 0; i < 2; i++)
+	{
+		if (strcmp(temp, m_bits[i]) == 0)
+		{
+			pass = true;
+		}
+		else
+		{
+			pass = false;
+		}
+	}
+
+	return pass;
+}
