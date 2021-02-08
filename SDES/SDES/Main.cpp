@@ -18,16 +18,19 @@ using std::getline;
 using std::bitset;
 
 void Encryption(char userInput[], char key[]);
-void Decryption(char input[], char key[]);
+void Decryption(char userInput[], char key1[], char key2[]);
 bool BitCheck(const string& bits);
 char* Swap(char key[]);
 char* PtSwap(char pt[]);
+void InversePtSwap(char XorStep1[], char XorStep2[], char Result[]);
 void EPSwap(char splitPT[], char result[]);
 char* Shift1(char key[]);
 char* Shift3(char key[]);
 void XorWithKey(char plaintext[], char key[], char result[]);
 void SBoxZero(char splitPT[], char result[]);
 void SBoxOne(char splitPT[], char result[]);
+void P4Swap(char SBoxResult1[], char SBoxResult2[], char Result[]);
+void Xor4Bit(char SplitPT1[], char P4Result[], char result[]);
 
 
 int main()
@@ -38,8 +41,12 @@ int main()
 	//bool done = false;
 
 	string inputStr = " ";
-	string keyStr = " ";
-	char key_array[11] = { '/0' };
+	string TenBitKey = " ";
+	string EightBitKey1 = " ";
+	string EightBitKey2 = " ";
+	char TenBitKeyRay[11] = { '/0' };
+	char EightBitKeyRay1[9] = { '/0' };
+	char EightBitKeyRay2[9] = { '/0' };
 	char pt_array[9] = { '/0' };
 
 	/*
@@ -49,16 +56,34 @@ int main()
 		<< "Please enter 2 for decrypt.\n" << endl;
 	*/
 
+	//ENCRYPTION
 	cout << "Enter 10-bit key." << endl;
-	cin >> keyStr;
+	cin >> TenBitKey;
 
 	cout << "Enter 8-bit Plaintext." << endl;
 	cin >> inputStr;
 
-	strcpy(key_array, keyStr.c_str());
+	strcpy(TenBitKeyRay, TenBitKey.c_str());
 	strcpy(pt_array, inputStr.c_str());
 
-	Encryption(pt_array, key_array);
+	Encryption(pt_array, TenBitKeyRay);
+
+
+	//DECRYPTION
+	cout << "Enter 8-bit key 1." << endl;
+	cin >> EightBitKey1;
+
+	cout << "Enter 8-bit key 2." << endl;
+	cin >> EightBitKey2;
+
+	cout << "Enter 8-bit Ciphertext." << endl;
+	cin >> inputStr;
+
+	strcpy(EightBitKeyRay1, EightBitKey1.c_str());
+	strcpy(EightBitKeyRay2, EightBitKey2.c_str());
+	strcpy(pt_array, inputStr.c_str());
+
+	Decryption(pt_array, EightBitKeyRay1, EightBitKeyRay2);
 
 	//cin >> menu;
 	//do
@@ -153,10 +178,6 @@ int main()
 
 void Encryption(char userInput[], char userKey[])
 {
-	/*
-		P10 = (k3, k5, k2, k7, k4, k10, k1, k9, k8, k6)
-		P8  = (k6, k3, k7, k4, k8, k5, k10, k9) which is KEY 1.
-	*/
 
 	char key1[10] = { '/0' };
 	char key2[10] = { '/0' };
@@ -170,6 +191,10 @@ void Encryption(char userInput[], char userKey[])
 	char SBoxSplit2[4] = { '/0' };
 	char SBoxResult1[2] = { '/0' };
 	char SBoxResult2[2] = { '/0' };
+	char P4Result[4] = { '/0' };
+	char Xor4BitResultStep1[4] = { '/0' };
+	char Xor4BitResultStep2[4] = { '/0' };
+	char EncryptedPT[8] = { '/0' };
 
 	//COPY USERKEY TO KEY1 AND KEY2
 	for (int i = 0; i < 10; ++i) {
@@ -183,19 +208,26 @@ void Encryption(char userInput[], char userKey[])
 	}
 
 	//FUNCTION CALLS TO GENERATE KEY 1
-	cout << "~~ Generating Key 1 ~~" << endl;
 	Swap(key1);
 	Shift1(key1);
 
+	cout << "Key 1 is: ";
+	for (int i = 0; i < 8; ++i) {
+		finalKey1[i] = key1[i];
+		cout << finalKey1[i];
+	}
+	cout << "\n" << endl;
+
 	//FUNCTION CALLS TO GENERATE KEY 2
-	cout << "~~ Generating Key 2 ~~" << endl;
 	Swap(key2);
 	Shift3(key2);
 
+	cout << "Key 2 is: ";
 	for (int i = 0; i < 8; ++i) {
-		finalKey1[i] = key1[i];
 		finalKey2[i] = key2[i];
+		cout << finalKey2[i];
 	}
+	cout << "\n" << endl;
 
 	//BEGIN ENCRYPTING plaintext with key1 and key2
 	PtSwap(plaintext);
@@ -237,15 +269,171 @@ void Encryption(char userInput[], char userKey[])
 	SBoxZero(SBoxSplit1, SBoxResult1);
 	SBoxOne(SBoxSplit2, SBoxResult2);
 
+	//P4 SWAP FUNCTION CALL
+	P4Swap(SBoxResult1, SBoxResult2, P4Result);
 
+	//XOR FUNCTION CALL "FINAL PART FIRST HALF OF ENCRYPTION"
+	Xor4Bit(splitPT1, P4Result, Xor4BitResultStep1);
+
+
+	//PART 2
+
+
+	//XOR PART 2 OF PLAINTEXT WITH KEY 1
+	XorWithKey(Xor4BitResultStep1, finalKey2, XorPT2);
+	
+	//SPLIT XOR'D PLAINTEXT INTO 2 PARTS
+	cout << "Pre Sbox Split Part 3: ";
+	for (int i = 0; i < 4; ++i) {
+		SBoxSplit1[i] = XorPT2[i];
+		cout << SBoxSplit1[i];
+	}
+	cout << endl;
+
+	cout << "Pre Sbox Split Part 4: ";
+	for (int i = 4, k = 0; i < 8; ++i, ++k) {
+		SBoxSplit2[k] = XorPT2[i];
+		cout << SBoxSplit2[k];
+	}
+	cout << endl;
+
+	//SBOX FUCNTION CALL
+	SBoxZero(SBoxSplit1, SBoxResult1);
+	SBoxOne(SBoxSplit2, SBoxResult2);
+
+	//P4 SWAP FUNCTION CALL
+	P4Swap(SBoxResult1, SBoxResult2, P4Result);
+
+	//XOR FUNCTION CALL "FINAL PART FIRST HALF OF ENCRYPTION"
+	Xor4Bit(splitPT2, P4Result, Xor4BitResultStep2);
+
+	//FINAL INVERSE SWAP FUNCTION CALL
+	InversePtSwap(Xor4BitResultStep2, Xor4BitResultStep1, EncryptedPT);
+
+	//COUT CIPHERTEXT TO USER
+	cout << "Your encrypted Ciphertext is: ";
+	for (int i = 0; i < 8; ++i) {
+		cout << EncryptedPT[i];
+	}
+	cout << "\n" << endl;
 }
 
-void Decryption(char input[], char key[])
+void Decryption(char userInput[], char userKey1[], char userKey2[])
 {
-	//might have to use a different var type
-	string decrypt_binary = input;
-	string userKey = key;
 
+	char finalKey1[8] = { '/0' };
+	char finalKey2[8] = { '/0' };
+	char plaintext[8] = { '/0' };
+	char splitPT1[4] = { '/0' };
+	char splitPT2[4] = { '/0' };
+	char XorPT2[8] = { '/0' };
+	char SBoxSplit1[4] = { '/0' };
+	char SBoxSplit2[4] = { '/0' };
+	char SBoxResult1[2] = { '/0' };
+	char SBoxResult2[2] = { '/0' };
+	char P4Result[4] = { '/0' };
+	char Xor4BitResultStep1[4] = { '/0' };
+	char Xor4BitResultStep2[4] = { '/0' };
+	char EncryptedPT[8] = { '/0' };
+
+	//COPY USERKEY TO KEY1 AND KEY2
+	for (int i = 0; i < 8; ++i) {
+		finalKey1[i] = userKey1[i];
+		finalKey2[i] = userKey2[i];
+	}
+
+	//COPY USERINPUT TO PLAINTEXT
+	for (int i = 0; i < 8; ++i) {
+		plaintext[i] = userInput[i];
+	}
+
+	//BEGIN ENCRYPTING plaintext with key1 and key2
+	PtSwap(plaintext);
+
+	//SPLIT PLAINTEXT INTO 2 PARTS
+	cout << "Split Part 1: ";
+	for (int i = 0; i < 4; ++i) {
+		splitPT1[i] = plaintext[i];
+		cout << splitPT1[i];
+	}
+	cout << endl;
+
+	cout << "Split Part 2: ";
+	for (int i = 4, k = 0; i < 8; ++i, ++k) {
+		splitPT2[k] = plaintext[i];
+		cout << splitPT2[k];
+	}
+	cout << endl;
+
+	//XOR PART 2 OF PLAINTEXT WITH KEY 1
+	XorWithKey(splitPT2, finalKey2, XorPT2);
+
+	//SPLIT XOR'D PLAINTEXT INTO 2 PARTS
+	cout << "Pre Sbox Split Part 1: ";
+	for (int i = 0; i < 4; ++i) {
+		SBoxSplit1[i] = XorPT2[i];
+		cout << SBoxSplit1[i];
+	}
+	cout << endl;
+
+	cout << "Pre Sbox Split Part 2: ";
+	for (int i = 4, k = 0; i < 8; ++i, ++k) {
+		SBoxSplit2[k] = XorPT2[i];
+		cout << SBoxSplit2[k];
+	}
+	cout << endl;
+
+	//SBOX FUCNTION CALL
+	SBoxZero(SBoxSplit1, SBoxResult1);
+	SBoxOne(SBoxSplit2, SBoxResult2);
+
+	//P4 SWAP FUNCTION CALL
+	P4Swap(SBoxResult1, SBoxResult2, P4Result);
+
+	//XOR FUNCTION CALL "FINAL PART FIRST HALF OF ENCRYPTION"
+	Xor4Bit(splitPT1, P4Result, Xor4BitResultStep1);
+
+
+	//PART 2
+
+
+	//XOR PART 2 OF PLAINTEXT WITH KEY 1
+	XorWithKey(Xor4BitResultStep1, finalKey1, XorPT2);
+
+	//SPLIT XOR'D PLAINTEXT INTO 2 PARTS
+	cout << "Pre Sbox Split Part 3: ";
+	for (int i = 0; i < 4; ++i) {
+		SBoxSplit1[i] = XorPT2[i];
+		cout << SBoxSplit1[i];
+	}
+	cout << endl;
+
+	cout << "Pre Sbox Split Part 4: ";
+	for (int i = 4, k = 0; i < 8; ++i, ++k) {
+		SBoxSplit2[k] = XorPT2[i];
+		cout << SBoxSplit2[k];
+	}
+	cout << endl;
+
+	//SBOX FUCNTION CALL
+	SBoxZero(SBoxSplit1, SBoxResult1);
+	SBoxOne(SBoxSplit2, SBoxResult2);
+
+	//P4 SWAP FUNCTION CALL
+	P4Swap(SBoxResult1, SBoxResult2, P4Result);
+
+	//XOR FUNCTION CALL "FINAL PART FIRST HALF OF ENCRYPTION"
+	Xor4Bit(splitPT2, P4Result, Xor4BitResultStep2);
+
+	//FINAL INVERSE SWAP FUNCTION CALL
+	InversePtSwap(Xor4BitResultStep2, Xor4BitResultStep1, EncryptedPT);
+
+	//COUT CIPHERTEXT TO USER
+	cout << "Your decrypted Ciphertext is: ";
+	for (int i = 0; i < 8; ++i) {
+		cout << EncryptedPT[i];
+	}
+	cout << "\n" << endl;
 }
 
 char* Swap(char key[]) {
@@ -294,6 +482,32 @@ char* PtSwap(char pt[]) {
 	cout << endl;
 
 	return pt;
+}
+
+void InversePtSwap(char XorStep1[], char XorStep2[], char Result[]) {
+
+	char temp[8] = { '/0' };
+
+	//INVERSE SWAP OF PLAINTEXT 4 1 3 5 7 2 8 6
+	for (int i = 0, j = 4; i < 4; ++i, ++j) {
+		temp[i] = XorStep1[i];
+		temp[j] = XorStep2[i];
+	}
+
+	swap(Result[0], temp[3]);
+	swap(Result[1], temp[0]);
+	swap(Result[2], temp[2]);
+	swap(Result[3], temp[4]);
+	swap(Result[4], temp[6]);
+	swap(Result[5], temp[1]);
+	swap(Result[6], temp[7]);
+	swap(Result[7], temp[5]);
+
+	cout << "Inverse IP Swap: ";
+	for (int i = 0; i < 8; ++i) {
+		cout << Result[i];
+	}
+	cout << endl;
 }
 
 void EPSwap(char splitPT[], char Result[]) {
@@ -366,11 +580,11 @@ char* Shift1(char key[]) {
 		mergedKeys[j] = shiftKey2[k];
 	}
 
-	cout << "Merged Key: ";
-	for (int i = 0; i < 10; ++i) {
-		cout << mergedKeys[i];
-	}
-	cout << endl;
+	//cout << "Merged Key: ";
+	//for (int i = 0; i < 10; ++i) {
+	//	cout << mergedKeys[i];
+	//}
+	//cout << endl;
 
 
 	// P8 SWAP 
@@ -383,11 +597,11 @@ char* Shift1(char key[]) {
 	swap(key[6], mergedKeys[9]);
 	swap(key[7], mergedKeys[8]);
 
-	cout << "P8 Swap & Returned Key 1: ";
-	for (int i = 0; i < 8; ++i) {
-		cout << key[i];
-	}
-	cout << endl;
+	//cout << "P8 Swap & Returned Key 1: ";
+	//for (int i = 0; i < 8; ++i) {
+	//	cout << key[i];
+	//}
+	//cout << endl;
 
 	return key;
 }
@@ -499,24 +713,24 @@ void XorWithKey(char plaintext[], char key[], char result[]) {
 
 void SBoxZero(char splitPT[], char result[]) {
 
-	// split box into 2 4 bit arrays
-	// use the sboxes from book on arrays
-	// combine 2bit arrays into single 4 bit array
-	// reposition 4bit array and return that
 	int SBox0[4][4] = { 1,0,3,2,3,2,1,0,0,2,1,3,3,1,3,2 };
-	//char* S0 = new char[3];
 	const char *bits[4] = { "00","01","10","11" };
-	char row[2];
-	char col[2];
-	int lr, lc, a;
+	char temp[] = "0";
+	char row[3] = "0";
+	char col[3] = "0";
+	int lr, lc;
 
+	//COPY 1ST POSTION AND 4TH POSITION OF SPLIT PLAINTEXT INTO NEW CHAR ARRAY
 	row[0] = splitPT[0];
-	row[1] = splitPT[3];
-	col[0] = splitPT[1];
-	col[1] = splitPT[2];
+	temp[0] = splitPT[3];
+	strcat(row, temp);
 
-	//CAN'T GET THEM TO COMPARE AND CHANGE LR AND LC....
-	//Probably sothing to do with us not passing in a pointer for strcmp to work but that's a bit out of the question here.
+	//COPY 2ND POSTION AND 3RD POSITION OF SPLIT PLAINTEXT INTO NEW CHAR ARRAY
+	col[0] = splitPT[1];
+	temp[0] = splitPT[2];
+	strcat(col, temp);
+
+	//STRING COMPARE THE ROW AND COLUMN TO THE CONSTANT BITS VARIABLE TO FIND THE ROW AND COLUMN POSITION INT
 	for (int i = 0; i < 4; ++i) {
 		if (strcmp(row, bits[i]) == 0) {
 			lr = i;
@@ -526,55 +740,132 @@ void SBoxZero(char splitPT[], char result[]) {
 		}
 	}
 
-	//a = SBox0[lr][lc];
-	//for (int i = 0; i < 3; ++i) {
-	//	S0[i] = bits[a][i];
-	//}
+	//ASSIGN THE CORRECT VARIABLES TO RESULT BASED ON POSITION IN SBOX MATRIX
+	if (SBox0[lr][lc] == 0) {
+		result[0] = '0';
+		result[1] = '0';
+	}
+	else if (SBox0[lr][lc] == 1) {
+		result[0] = '0';
+		result[1] = '1';
+	}
+	else if (SBox0[lr][lc] == 2) {
+		result[0] = '1';
+		result[1] = '0';
+	}
+	else if (SBox0[lr][lc] == 3) {
+		result[0] = '1';
+		result[1] = '1';
+	}
 
+	cout << "Post S-Box Zero: ";
+	for (int i = 0; i < 2; ++i) {
+		cout << result[i];
+	}
+	cout << endl;
 }
 
 void SBoxOne(char splitPT[], char result[]) {
 
-	// split box into 2 4 bit arrays
-	// use the sboxes from book on arrays
-	// combine 2bit arrays into single 4 bit array
-	// reposition 4bit array and return that
-	char S0[4] = { '\0' };
-	char sBox1[4][4] = { '\0' };
+	int SBox1[4][4] = { 0,1,2,3,2,0,1,3,3,0,1,0,2,1,0,3 };
+	const char* bits[4] = { "00","01","10","11" };
+	char temp[] = "0";
+	char row[3] = "0";
+	char col[3] = "0";
+	int lr, lc;
 
-	//CREATE S-BOX 1
-	sBox1[0][0] = '0';
-	sBox1[0][1] = '1';
-	sBox1[0][2] = '2';
-	sBox1[0][3] = '3';
-	sBox1[1][0] = '2';
-	sBox1[1][1] = '0';
-	sBox1[1][2] = '1';
-	sBox1[1][3] = '3';
-	sBox1[2][0] = '3';
-	sBox1[2][1] = '0';
-	sBox1[2][2] = '1';
-	sBox1[2][3] = '0';
-	sBox1[3][0] = '2';
-	sBox1[3][1] = '1';
-	sBox1[3][2] = '0';
-	sBox1[3][3] = '3';
+	//COPY 1ST POSTION AND 4TH POSITION OF SPLIT PLAINTEXT INTO NEW CHAR ARRAY
+	row[0] = splitPT[0];
+	temp[0] = splitPT[3];
+	strcat(row, temp);
 
-	//DISPLAY S-BOX 1
-	cout << "S1 BOX:" << endl;
-	for (int i = 0; i < 4; i++)
-	{
-		for (int j = 0; j < 4; j++)
-		{
-			cout << sBox1[i][j];
+	//COPY 2ND POSTION AND 3RD POSITION OF SPLIT PLAINTEXT INTO NEW CHAR ARRAY
+	col[0] = splitPT[1];
+	temp[0] = splitPT[2];
+	strcat(col, temp);
+
+	//STRING COMPARE THE ROW AND COLUMN TO THE CONSTANT BITS VARIABLE TO FIND THE ROW AND COLUMN POSITION INT
+	for (int i = 0; i < 4; ++i) {
+		if (strcmp(row, bits[i]) == 0) {
+			lr = i;
 		}
-		cout << endl;
+		if (strcmp(col, bits[i]) == 0) {
+			lc = i;
+		}
 	}
 
+	//ASSIGN THE CORRECT VARIABLES TO RESULT BASED ON POSITION IN SBOX MATRIX
+	if (SBox1[lr][lc] == 0) {
+		result[0] = '0';
+		result[1] = '0';
+	}
+	else if (SBox1[lr][lc] == 1) {
+		result[0] = '0';
+		result[1] = '1';
+	}
+	else if (SBox1[lr][lc] == 2) {
+		result[0] = '1';
+		result[1] = '0';
+	}
+	else if (SBox1[lr][lc] == 3) {
+		result[0] = '1';
+		result[1] = '1';
+	}
 
+	cout << "Post S-Box One: ";
+	for (int i = 0; i < 2; ++i) {
+		cout << result[i];
+	}
+	cout << endl;
 }
 
+void P4Swap(char SBoxResult1[], char SBoxResult2[], char Result[]) {
 
+	Result[0] = SBoxResult1[1];
+	Result[1] = SBoxResult2[1];
+	Result[2] = SBoxResult2[0];
+	Result[3] = SBoxResult1[0];
+
+
+	cout << "P4 Swap Result: ";
+	for (int i = 0; i < 4; ++i) {
+		cout << Result[i];
+	}
+	cout << endl;
+}
+
+void Xor4Bit(char SplitPT1[], char P4Result[], char result[]){
+
+	cout << "XOR Result: ";
+	for (int i = 0; i < 4; ++i) {
+		if ((SplitPT1[i] == '0' && P4Result[i] == '0') || (SplitPT1[i] == '1' && P4Result[i] == '1')) {
+			result[i] = '0';
+		}
+		else if ((SplitPT1[i] == '0' && P4Result[i] == '1') || (SplitPT1[i] == '1' && P4Result[i] == '0')) {
+			result[i] = '1';
+		}
+		cout << result[i];
+	}
+	cout << endl;
+}
+
+//char* InversePermutation(char input[])
+//{
+//	char swappedKey[10] = { '\0' };
+//
+//	swap(swappedKey[0], input[3]);
+//	swap(swappedKey[1], input[0]);
+//	swap(swappedKey[2], input[2]);
+//	swap(swappedKey[3], input[4]);
+//	swap(swappedKey[4], input[6]);
+//	swap(swappedKey[5], input[1]);
+//	swap(swappedKey[6], input[7]);
+//	swap(swappedKey[7], input[5]);
+//
+//
+//
+//	return swappedKey;
+//}
 
 
 //bool BitCheck(const string & bits)
