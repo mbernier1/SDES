@@ -20,7 +20,9 @@ using std::bitset;
 void Encryption(char input[], char key[]);
 char* Permutation(char input[]);
 char* InversePermutation(char input[]);
-char* XOR(char EP[], char key[]);
+char* XORWithKey(char EP[], char key[]);
+char* S_Boxes(char box[]);
+char* XORFourBit(char split1[], char modSplit2[]);
 void Decryption(char input[], char key[]);
 bool BitCheck(const string& bits);
 char* Swap(char key[]);
@@ -217,7 +219,9 @@ void Encryption(char input[], char userKey[])
 	expan_perm[6] = perm2[3];
 	expan_perm[7] = perm2[0];
 
-	XOR(expan_perm, finalKey1);
+	XORWithKey(expan_perm, finalKey1);
+
+	S_Boxes(expan_perm);
 	
 	
 }
@@ -259,47 +263,112 @@ char* InversePermutation(char input[])
 	return swappedKey;
 }
 
-char* XOR(char EP[], char key[])
+char* XORWithKey(char EP[], char key[])
 {
-	//XOR the permutated plaintext witht he first generated key
-	//return the new 8 bit array from the XOR
-	
 	char tempRay[8] = {'\0'};
 
+	// xor the passed in arrays and store them in a temp array
 	for (int i = 0; i < 8; i++)
 	{		
-		if(EP[i] == 0 && key[i] == 0) //if both arrays are 0
+		if(EP[i] == '0' && key[i] == '0') //if both arrays are 0
 		{
 			tempRay[i] = 0;
 		}
-		if(EP[i] == 1 && key[i] == 0) //if one array has a 1
+		else if(EP[i] == '1' && key[i] == '0') //if one array has a 1
 		{
 			tempRay[i] = 1;
 		}
-		if(EP[i] == 0 && key[i] == 1) //if one array has a 1
+		else if(EP[i] == '0' && key[i] == '1') //if one array has a 1
 		{
 			tempRay[i] = 1;
 		}
-		else //if both arrays are 1
+		else if (EP[i] == '0' && key[i] == '1')//if both arrays are 1
 		{
 			tempRay[i] = 0;
 		}
 	}
-	/*for (int i = 0; i < 8; i++)
-	{
-		EP[i] = {'\0'};
-	}*/
-	
+
+	//assign temp ray to a var that can be returned
 	for (int i = 0; i < 8; i++)
 	{
 		EP[i] = tempRay[i];
 	}
-
 	
-
 	return EP;
 }
 
+char* S_Boxes(char box[])
+{
+	// split box into 2 4 bit arrays
+	// use the sboxes from book on arrays
+	// combine 2bit arrays into single 4 bit array
+	// reposition 4bit array and return that
+	char S0[4] = { '\0' };
+	char S1[4] = { '\0' };
+	char sBox0[4][4];
+	char sBox1[4][4];
+
+	sBox0[0][0] = '1';
+	sBox0[0][1] = '0';
+	sBox0[0][2] = '3';
+	sBox0[0][3] = '2';
+	sBox0[1][0] = '3';
+	sBox0[1][1] = '2';
+	sBox0[1][2] = '1';
+	sBox0[1][3] = '0';
+	sBox0[2][0] = '0';
+	sBox0[2][1] = '2';
+	sBox0[2][2] = '1';
+	sBox0[2][3] = '3';
+	sBox0[3][0] = '2';
+	sBox0[3][1] = '1';
+	sBox0[3][2] = '3';
+	sBox0[3][3] = '2';
+
+	sBox1[0][0] = '0';
+	sBox1[0][1] = '1';
+	sBox1[0][2] = '2';
+	sBox1[0][3] = '3';
+	sBox1[1][0] = '2';
+	sBox1[1][1] = '0';
+	sBox1[1][2] = '1';
+	sBox1[1][3] = '3';
+	sBox1[2][0] = '3';
+	sBox1[2][1] = '0';
+	sBox1[2][2] = '1';
+	sBox1[2][3] = '0';
+	sBox1[3][0] = '3';
+	sBox1[3][1] = '1';
+	sBox1[3][2] = '0';
+	sBox1[3][3] = '11';
+
+	cout << "Here is S0 box: ";
+	
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			cout << sBox0[i][j];
+		}
+		cout << endl;
+	}
+
+	for (int i = 0, j = 4; j < 8; i++, j++)
+	{
+		S0[i] = box[i];
+		S1[i] = box[j];
+	}
+
+	return box;
+}
+
+
+char* XORFourBit(char split1[], char modSplit2[])
+{
+	char tempray[8];
+
+	return tempray;
+}
 
 void Decryption(char input[], char key[])
 {
