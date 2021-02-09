@@ -19,7 +19,7 @@ using std::bitset;
 
 void Encryption(char userInput[], char key[]);
 void Decryption(char userInput[], char key1[], char key2[]);
-bool BitCheck(const string& bits);
+bool BitCheck(const char bits[], int raySize);
 char* Swap(char key[]);
 char* PtSwap(char pt[]);
 void InversePtSwap(char XorStep1[], char XorStep2[], char Result[]);
@@ -96,13 +96,15 @@ int main()
 			cout << "Enter 8-bit Plaintext." << endl;
 			cin >> inputStr;
 
-			if (BitCheck(inputStr) == true && BitCheck(TenBitKey) == true)
+			strcpy(pt_array, inputStr.c_str());
+			strcpy(TenBitKeyRay, TenBitKey.c_str());
+
+			if (BitCheck(pt_array, 8) == true && BitCheck(TenBitKeyRay, 10) == true)
 			{
 				if (inputStr.length() == 8 && TenBitKey.length() == 10)
 				{
-					strcpy(pt_array, inputStr.c_str());
-
-					strcpy(TenBitKeyRay, TenBitKey.c_str());
+					//strcpy(pt_array, inputStr.c_str());
+					//strcpy(TenBitKeyRay, TenBitKey.c_str());
 
 					Encryption(pt_array, TenBitKeyRay);
 
@@ -130,13 +132,15 @@ int main()
 			cout << "Enter 8-bit Ciphertext." << endl;
 			cin >> inputStr;
 
-			if (BitCheck(inputStr) == true && BitCheck(EightBitKey1) == true && BitCheck(EightBitKey2) == true)
+			strcpy(EightBitKeyRay1, EightBitKey1.c_str());
+			strcpy(EightBitKeyRay2, EightBitKey2.c_str());
+			strcpy(pt_array, inputStr.c_str());
+
+			if (BitCheck(pt_array, 8) == true && BitCheck(EightBitKeyRay1, 10) == true && BitCheck(EightBitKeyRay2, 10) == true)
 			{
 				if (inputStr.length() == 8 && EightBitKey1.length() == 10 && EightBitKey2.length() == 10)
 				{
-					strcpy(EightBitKeyRay1, EightBitKey1.c_str());
-					strcpy(EightBitKeyRay2, EightBitKey2.c_str());
-					strcpy(pt_array, inputStr.c_str());
+
 
 					Decryption(pt_array, EightBitKeyRay1, EightBitKeyRay2);
 
@@ -851,19 +855,15 @@ void Xor4Bit(char SplitPT1[], char P4Result[], char result[]) {
 //}
 
 
-bool BitCheck(const string& bits)
+bool BitCheck(const char bits[], int raySize)
 {
-	const char* m_bits[2] = { "0","1" };
-	char temp[10] = { "0" };
-	bool pass = false;
-
-	//PUT BITS PASSED IN INTO AN ARRAY
-	strcpy(temp, bits.c_str());
-
+	bool pass = true;
+	int i = 0;
 	//COMPARE EACH BIT FROM THE STRING PASSED IN AGAINST SMALLER ARRAY WITH 1 AND 0 IN IT
-	for (int i = 0; i < 2; i++)
+
+	while (pass && i < raySize)
 	{
-		if (strcmp(temp, m_bits[i]) == 0)
+		if (bits[i] == '0' || bits[i] == '1')
 		{
 			pass = true;
 		}
@@ -871,7 +871,9 @@ bool BitCheck(const string& bits)
 		{
 			pass = false;
 		}
+		i++;
 	}
+
 
 	return pass;
 }
