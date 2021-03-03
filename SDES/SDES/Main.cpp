@@ -212,37 +212,37 @@ void Encryption(char userInput[], char userKey[])
 	PtSwap(plaintext);
 
 	//SPLIT PLAINTEXT INTO 2 PARTS
-	//cout << "Split Part 1: ";
+	cout << "Split Part 1: ";
 	for (int i = 0; i < 4; ++i) {
 		splitPT1[i] = plaintext[i];
-		//cout << splitPT1[i];
+		cout << splitPT1[i];
 	}
-	//cout << endl;
+	cout << endl;
 
-	//cout << "Split Part 2: ";
+	cout << "Split Part 2: ";
 	for (int i = 4, k = 0; i < 8; ++i, ++k) {
 		splitPT2[k] = plaintext[i];
-		//cout << splitPT2[k];
+		cout << splitPT2[k];
 	}
-	//cout << endl;
+	cout << endl;
 
 	//XOR PART 2 OF PLAINTEXT WITH KEY 1
 	XorWithKey(splitPT2, finalKey1, XorPT2);
 
 	//SPLIT XOR'D PLAINTEXT INTO 2 PARTS
-	//cout << "Pre Sbox Split Part 1: ";
+	cout << "Pre Sbox Split Part 1: ";
 	for (int i = 0; i < 4; ++i) {
 		SBoxSplit1[i] = XorPT2[i];
-		//cout << SBoxSplit1[i];
+		cout << SBoxSplit1[i];
 	}
-	//cout << endl;
+	cout << endl;
 
-	//cout << "Pre Sbox Split Part 2: ";
+	cout << "Pre Sbox Split Part 2: ";
 	for (int i = 4, k = 0; i < 8; ++i, ++k) {
 		SBoxSplit2[k] = XorPT2[i];
-		//cout << SBoxSplit2[k];
+		cout << SBoxSplit2[k];
 	}
-	//cout << endl;
+	cout << endl;
 
 	//SBOX FUCNTION CALL
 	SBoxZero(SBoxSplit1, SBoxResult1);
@@ -262,19 +262,19 @@ void Encryption(char userInput[], char userKey[])
 	XorWithKey(Xor4BitResultStep1, finalKey2, XorPT2);
 
 	//SPLIT XOR'D PLAINTEXT INTO 2 PARTS
-	//cout << "Pre Sbox Split Part 3: ";
+	cout << "Pre Sbox Split Part 3: ";
 	for (int i = 0; i < 4; ++i) {
 		SBoxSplit1[i] = XorPT2[i];
-		//cout << SBoxSplit1[i];
+		cout << SBoxSplit1[i];
 	}
-	//cout << endl;
+	cout << endl;
 
-	//cout << "Pre Sbox Split Part 4: ";
+	cout << "Pre Sbox Split Part 4: ";
 	for (int i = 4, k = 0; i < 8; ++i, ++k) {
 		SBoxSplit2[k] = XorPT2[i];
-		//cout << SBoxSplit2[k];
+		cout << SBoxSplit2[k];
 	}
-	//cout << endl;
+	cout << endl;
 
 	//SBOX FUCNTION CALL
 	SBoxZero(SBoxSplit1, SBoxResult1);
@@ -330,37 +330,37 @@ void Decryption(char userInput[], char userKey1[], char userKey2[])
 	PtSwap(plaintext);
 
 	//SPLIT PLAINTEXT INTO 2 PARTS
-	//cout << "Split Part 1: ";
+	cout << "Split Part 1: ";
 	for (int i = 0; i < 4; ++i) {
 		splitPT1[i] = plaintext[i];
-		//cout << splitPT1[i];
+		cout << splitPT1[i];
 	}
-	//cout << endl;
+	cout << endl;
 
-	//cout << "Split Part 2: ";
+	cout << "Split Part 2: ";
 	for (int i = 4, k = 0; i < 8; ++i, ++k) {
 		splitPT2[k] = plaintext[i];
-		//cout << splitPT2[k];
+		cout << splitPT2[k];
 	}
-	//cout << endl;
+	cout << endl;
 
 	//XOR PART 2 OF PLAINTEXT WITH KEY 1
 	XorWithKey(splitPT2, finalKey2, XorPT2);
 
 	//SPLIT XOR'D PLAINTEXT INTO 2 PARTS
-	//cout << "Pre Sbox Split Part 1: ";
+	cout << "Pre Sbox Split Part 1: ";
 	for (int i = 0; i < 4; ++i) {
 		SBoxSplit1[i] = XorPT2[i];
-		//cout << SBoxSplit1[i];
+		cout << SBoxSplit1[i];
 	}
-	//cout << endl;
+	cout << endl;
 
-	//cout << "Pre Sbox Split Part 2: ";
+	cout << "Pre Sbox Split Part 2: ";
 	for (int i = 4, k = 0; i < 8; ++i, ++k) {
 		SBoxSplit2[k] = XorPT2[i];
-		//cout << SBoxSplit2[k];
+		cout << SBoxSplit2[k];
 	}
-	//cout << endl;
+		cout << endl;
 
 	//SBOX FUCNTION CALL
 	SBoxZero(SBoxSplit1, SBoxResult1);
@@ -380,19 +380,19 @@ void Decryption(char userInput[], char userKey1[], char userKey2[])
 	XorWithKey(Xor4BitResultStep1, finalKey1, XorPT2);
 
 	//SPLIT XOR'D PLAINTEXT INTO 2 PARTS
-	//cout << "Pre Sbox Split Part 3: ";
+	cout << "Pre Sbox Split Part 3: ";
 	for (int i = 0; i < 4; ++i) {
 		SBoxSplit1[i] = XorPT2[i];
-		//cout << SBoxSplit1[i];
+		cout << SBoxSplit1[i];
 	}
-	//cout << endl;
+	cout << endl;
 
-	//cout << "Pre Sbox Split Part 4: ";
+	cout << "Pre Sbox Split Part 4: ";
 	for (int i = 4, k = 0; i < 8; ++i, ++k) {
 		SBoxSplit2[k] = XorPT2[i];
-		//cout << SBoxSplit2[k];
+		cout << SBoxSplit2[k];
 	}
-	//cout << endl;
+	cout << endl;
 
 	//SBOX FUCNTION CALL
 	SBoxZero(SBoxSplit1, SBoxResult1);
@@ -430,12 +430,12 @@ char* Swap(char key[]) {
 	swap(swappedKey[8], key[7]);
 	swap(swappedKey[9], key[5]);
 
-	//cout << "P10 Swap: ";
+	cout << "P10 Swap: ";
 	for (int i = 0; i < 10; ++i) {
 		key[i] = swappedKey[i];
-		//cout << key[i];
+		cout << key[i];
 	}
-	//cout << endl;
+	cout << endl;
 
 	return key;
 }
@@ -453,12 +453,12 @@ char* PtSwap(char pt[]) {
 	swap(swappedPt[6], pt[4]);
 	swap(swappedPt[7], pt[6]);
 
-	//cout << "IP Swap: ";
+	cout << "IP Swap: ";
 	for (int i = 0; i < 8; ++i) {
 		pt[i] = swappedPt[i];
-		//cout << pt[i];
+		cout << pt[i];
 	}
-	//cout << endl;
+	cout << endl;
 
 	return pt;
 }
@@ -482,11 +482,11 @@ void InversePtSwap(char XorStep1[], char XorStep2[], char Result[]) {
 	swap(Result[6], temp[7]);
 	swap(Result[7], temp[5]);
 
-	//cout << "Inverse IP Swap: ";
-	//for (int i = 0; i < 8; ++i) {
-	//	cout << Result[i];
-	//}
-	//cout << endl;
+	cout << "Inverse IP Swap: ";
+	for (int i = 0; i < 8; ++i) {
+		cout << Result[i];
+	}
+	cout << endl;
 }
 
 void EPSwap(char splitPT[], char Result[]) {
@@ -500,11 +500,11 @@ void EPSwap(char splitPT[], char Result[]) {
 	Result[6] = splitPT[3];
 	Result[7] = splitPT[0];
 
-	//cout << "EP Swap: ";
-	//for (int i = 0; i < 8; ++i) {
-	//	cout << Result[i];
-	//}
-	//cout << endl;
+	cout << "EP Swap: ";
+	for (int i = 0; i < 8; ++i) {
+		cout << Result[i];
+	}
+	cout << endl;
 
 }
 
@@ -518,19 +518,19 @@ char* Shift1(char key[]) {
 	char mergedKeys[10] = { '/0' };
 
 	// SPLIT KEY INTO TWO PARTS
-	//cout << "Split Part 1: ";
+	cout << "Split Part 1: ";
 	for (int i = 0; i < 5; ++i) {
 		splitKey1[i] = key[i];
-		//cout << splitKey1[i];
+		cout << splitKey1[i];
 	}
-	//cout << endl;
+	cout << endl;
 
-	//cout << "Split Part 2: ";
+	cout << "Split Part 2: ";
 	for (int i = 5, k = 0; i < 10; ++i, ++k) {
 		splitKey2[k] = key[i];
-		//cout << splitKey2[k];
+		cout << splitKey2[k];
 	}
-	//cout << endl;
+	cout << endl;
 
 
 	// CIRCLE LEFT SHIFT BOTH KEY PARTS
@@ -541,16 +541,16 @@ char* Shift1(char key[]) {
 	shiftKey1[4] = splitKey1[0];
 	shiftKey2[4] = splitKey2[0];
 
-	//cout << "Circle Left Shift Part 1: ";
-	//for (int i = 0; i < 5; ++i) {
-	//	cout << shiftKey1[i];
-	//}
-	//cout << endl;
-	//cout << "Circle Left Shift Part 2: ";
-	//for (int i = 0; i < 5; ++i) {
-	//	cout << shiftKey2[i];
-	//}
-	//cout << endl;
+	cout << "Circle Left Shift Part 1: ";
+	for (int i = 0; i < 5; ++i) {
+		cout << shiftKey1[i];
+	}
+	cout << endl;
+	cout << "Circle Left Shift Part 2: ";
+	for (int i = 0; i < 5; ++i) {
+		cout << shiftKey2[i];
+	}
+	cout << endl;
 
 
 	// MERGE SHIFTED KEYS
@@ -559,11 +559,11 @@ char* Shift1(char key[]) {
 		mergedKeys[j] = shiftKey2[k];
 	}
 
-	//cout << "Merged Key: ";
-	//for (int i = 0; i < 10; ++i) {
-	//	cout << mergedKeys[i];
-	//}
-	//cout << endl;
+	cout << "Merged Key: ";
+	for (int i = 0; i < 10; ++i) {
+		cout << mergedKeys[i];
+	}
+	cout << endl;
 
 
 	// P8 SWAP 
@@ -576,11 +576,11 @@ char* Shift1(char key[]) {
 	swap(key[6], mergedKeys[9]);
 	swap(key[7], mergedKeys[8]);
 
-	//cout << "P8 Swap & Returned Key 1: ";
-	//for (int i = 0; i < 8; ++i) {
-	//	cout << key[i];
-	//}
-	//cout << endl;
+	cout << "P8 Swap & Returned Key 1: ";
+	for (int i = 0; i < 8; ++i) {
+		cout << key[i];
+	}
+	cout << endl;
 
 	return key;
 }
@@ -595,19 +595,19 @@ char* Shift3(char key[]) {
 	char mergedKeys[10] = { '/0' };
 
 	// SPLIT KEY INTO TWO PARTS
-	//cout << "Split Part 1: ";
+	cout << "Split Part 1: ";
 	for (int i = 0; i < 5; ++i) {
 		splitKey1[i] = key[i];
-		//cout << splitKey1[i];
+		cout << splitKey1[i];
 	}
-	//cout << endl;
+	cout << endl;
 
-	//cout << "Split Part 2: ";
+	cout << "Split Part 2: ";
 	for (int i = 5, k = 0; i < 10; ++i, ++k) {
 		splitKey2[k] = key[i];
-		//cout << splitKey2[k];
+		cout << splitKey2[k];
 	}
-	//cout << endl;
+	cout << endl;
 
 
 	// CIRCLE LEFT SHIFT 3 BOTH KEY PARTS
@@ -620,16 +620,16 @@ char* Shift3(char key[]) {
 	shiftKey1[1] = splitKey1[4];
 	shiftKey2[1] = splitKey2[4];
 
-	//cout << "Circle Left Shift Part 1: ";
-	//for (int i = 0; i < 5; ++i) {
-	//	cout << shiftKey1[i];
-	//}
-	//cout << endl;
-	//cout << "Circle Left Shift Part 2: ";
-	//for (int i = 0; i < 5; ++i) {
-	//	cout << shiftKey2[i];
-	//}
-	//cout << endl;
+	cout << "Circle Left Shift Part 1: ";
+	for (int i = 0; i < 5; ++i) {
+		cout << shiftKey1[i];
+	}
+	cout << endl;
+	cout << "Circle Left Shift Part 2: ";
+	for (int i = 0; i < 5; ++i) {
+		cout << shiftKey2[i];
+	}
+	cout << endl;
 
 
 	// MERGE SHIFTED KEYS
@@ -638,11 +638,11 @@ char* Shift3(char key[]) {
 		mergedKeys[j] = shiftKey2[k];
 	}
 
-	//cout << "Merged Key: ";
-	//for (int i = 0; i < 10; ++i) {
-	//	cout << mergedKeys[i];
-	//}
-	//cout << endl;
+	cout << "Merged Key: ";
+	for (int i = 0; i < 10; ++i) {
+		cout << mergedKeys[i];
+	}
+	cout << endl;
 
 
 	// P8 SWAP 
@@ -655,11 +655,11 @@ char* Shift3(char key[]) {
 	swap(key[6], mergedKeys[9]);
 	swap(key[7], mergedKeys[8]);
 
-	//cout << "P8 Swap & Returned Key 1: ";
-	//for (int i = 0; i < 8; ++i) {
-	//	cout << key[i];
-	//}
-	//cout << endl;
+	cout << "P8 Swap & Returned Key 1: ";
+	for (int i = 0; i < 8; ++i) {
+		cout << key[i];
+	}
+	cout << endl;
 
 	return key;
 }
@@ -677,7 +677,7 @@ void XorWithKey(char plaintext[], char key[], char result[]) {
 	//FUNCTION CALL TO PERFORM EP SWAP
 	EPSwap(EPPlaintext, EPPResult);
 
-	//cout << "XOR Result: ";
+	cout << "XOR Result: ";
 	for (int i = 0; i < 8; ++i) {
 		if ((EPPResult[i] == '0' && key[i] == '0') || (EPPResult[i] == '1' && key[i] == '1')) {
 			result[i] = '0';
@@ -685,9 +685,9 @@ void XorWithKey(char plaintext[], char key[], char result[]) {
 		else if ((EPPResult[i] == '0' && key[i] == '1') || (EPPResult[i] == '1' && key[i] == '0')) {
 			result[i] = '1';
 		}
-		//cout << result[i];
+		cout << result[i];
 	}
-	//cout << endl;
+	cout << endl;
 }
 
 void SBoxZero(char splitPT[], char result[]) {
@@ -737,11 +737,11 @@ void SBoxZero(char splitPT[], char result[]) {
 		result[1] = '1';
 	}
 
-	//cout << "Post S-Box Zero: ";
-	//for (int i = 0; i < 2; ++i) {
-	//	cout << result[i];
-	//}
-	//cout << endl;
+	cout << "Post S-Box Zero: ";
+	for (int i = 0; i < 2; ++i) {
+		cout << result[i];
+	}
+	cout << endl;
 }
 
 void SBoxOne(char splitPT[], char result[]) {
@@ -791,11 +791,11 @@ void SBoxOne(char splitPT[], char result[]) {
 		result[1] = '1';
 	}
 
-	//cout << "Post S-Box One: ";
-	//for (int i = 0; i < 2; ++i) {
-	//	cout << result[i];
-	//}
-	//cout << endl;
+	cout << "Post S-Box One: ";
+	for (int i = 0; i < 2; ++i) {
+		cout << result[i];
+	}
+	cout << endl;
 }
 
 void P4Swap(char SBoxResult1[], char SBoxResult2[], char Result[]) {
@@ -806,16 +806,16 @@ void P4Swap(char SBoxResult1[], char SBoxResult2[], char Result[]) {
 	Result[3] = SBoxResult1[0];
 
 
-	//cout << "P4 Swap Result: ";
-	//for (int i = 0; i < 4; ++i) {
-	//	cout << Result[i];
-	//}
-	//cout << endl;
+	cout << "P4 Swap Result: ";
+	for (int i = 0; i < 4; ++i) {
+		cout << Result[i];
+	}
+	cout << endl;
 }
 
 void Xor4Bit(char SplitPT1[], char P4Result[], char result[]) {
 
-	//cout << "XOR Result: ";
+	cout << "XOR Result: ";
 	for (int i = 0; i < 4; ++i) {
 		if ((SplitPT1[i] == '0' && P4Result[i] == '0') || (SplitPT1[i] == '1' && P4Result[i] == '1')) {
 			result[i] = '0';
@@ -823,9 +823,9 @@ void Xor4Bit(char SplitPT1[], char P4Result[], char result[]) {
 		else if ((SplitPT1[i] == '0' && P4Result[i] == '1') || (SplitPT1[i] == '1' && P4Result[i] == '0')) {
 			result[i] = '1';
 		}
-		//cout << result[i];
+		cout << result[i];
 	}
-	//cout << endl;
+	cout << endl;
 }
 
 bool BitCheck(const char bits[], int raySize)
